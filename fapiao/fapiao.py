@@ -1,5 +1,3 @@
-
-
 import os
 import fitz
 from pyzbar.pyzbar import decode
@@ -78,11 +76,6 @@ if __name__ == '__main__':
     print('')
     print('本次更改文件名数量：',len(all_files))
 
-    print('xxxxxxxxxxxxxxxxxxxxxxx')
-    print('第三版：这里是第三版的更改，在第二版时不会显示')
-    print('44444444444444444')
-
-#这一行是在hot_fix分支上进行的操作。
 
 #参考：https://blog.csdn.net/qq_35448080/article/details/114762390
-#这一行测试冲突（master)
+
