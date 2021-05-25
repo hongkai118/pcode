@@ -68,7 +68,7 @@ if __name__ == '__main__':
     if excel_y=='y':
         #打开excel.
         wb=xw.Book()
-        sht=wb.sheets['sheet1']
+        sht=wb.sheets['Sheet1']
         biaotou = ['日期','金额']
         sht.range('a1').value = biaotou
         sht.range('a2').value=fapiao_list
