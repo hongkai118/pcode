@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>编辑班级</h1>
+    <form method="POST" action="/edit_classes/?nid={{result.id}}"> <!-- 也可以通过url(get）传值-->
+<!--        <input style ="display:none" name="id" value="{{result.id}}"/>#可以通过post传值-->
+        <input type="text" name="edit_n" value="{{result.class}}"/>
+        <input type="submit" value="提交" />
+
+    </form>
+
+</body>
+</html>

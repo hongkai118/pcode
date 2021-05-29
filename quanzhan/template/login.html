@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" href="/static/commons.css"/>-->
+</head>
+<body>
+    <h1>用户登录</h1>
+    <form method="POST" action="/login/"> <!--这个应该指的是网页的url地址（指向login函数），而不是login的html文件。所以method提交后重新访问 -->
+        <input type="text" name="username" />
+        <input type="password" name="pwd" />
+        <input type="submit" value="提交" />
+    </form>
+{{msgg}}
+
+</body>
+</html>

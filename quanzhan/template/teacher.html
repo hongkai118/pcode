@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>老师列表</h1>
+<a href="/add_teacher/">添加</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>编 号</th>
+        <th>姓 名</th>
+        <th>操 作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for t in teacher_list %}
+    <tr>
+        <td>{{t.id}}</td>
+        <td>{{t.t_name}}</td>
+        <td><a href="/del_teacher/?t_id={{t.id}}">删除</a> |
+            <a href="/edit_teacher/?t_id={{t.id}}">编辑</a>
+        </td>
+        <td></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
