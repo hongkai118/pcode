@@ -6,14 +6,14 @@
 from django.shortcuts import HttpResponse,render,redirect
 import pymysql
 
-def mysql_select(sql_select):
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
-    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-    cursor.execute(sql_select)
-    result = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return result
+# def mysql_select(sql_select):
+#     conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
+#     cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+#     cursor.execute(sql_select)
+#     result = cursor.fetchall()
+#     cursor.close()
+#     conn.close()
+#     return result
 
 
 # def mysql_insert(sql_insert):
@@ -41,6 +41,7 @@ def index(request):
     })
 
 
+
 def login(request):
     if request.method == "GET":
         return render(request, 'login.html')
@@ -51,6 +52,9 @@ def login(request):
             return HttpResponse('恭喜你登录成功')
         else:
             return render(request,'login.html',{'msgg':'账号或密码不对'})
+
+from utls import sqlhelper
+
 
 def classes(request):
     '''
@@ -67,7 +71,7 @@ def classes(request):
     # # print(class_list)
     # cursor.close()
     # conn.close()
-    class_list = mysql_select("select id,class from class")
+    class_list = sqlhelper.get_list("select id,class from class",[])
 
     #再进行模板渲染
     return render(request, 'classes.html', {'class_list': class_list})
@@ -81,12 +85,13 @@ def add_classes(request):
         return render(request,'add_classes.html')
     else:
         v = request.POST.get('class_name')
-        conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
-        cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-        cursor.execute("insert into class(class) values (%s)", [v,])
-        conn.commit()
-        cursor.close()
-        conn.close()
+        # conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
+        # cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+        # cursor.execute("insert into class(class) values (%s)", [v,])
+        # conn.commit()
+        # cursor.close()
+        # conn.close()
+        sqlhelper.modify("insert into class(class) values (%s)", [v,])
 
         return redirect('/classes/') #这里访问的是Url（意思访问函数）就有值，传给classes页面了
         # return render(request,'classes.html') #这里访问的是直接访问的classes模板文件，没有传递值进来，所有值白板。
@@ -96,12 +101,13 @@ def del_classes(request):
     nid = request.GET.get('nid')
 
     #2. 连接数据库，删除数据
-    conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
-    cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-    cursor.execute("delete from class where id=%s", [nid,])
-    conn.commit()
-    cursor.close()
-    conn.close()
+    # conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
+    # cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+    # cursor.execute("delete from class where id=%s", [nid,])
+    # conn.commit()
+    # cursor.close()
+    # conn.close()
+    sqlhelper.modify("delete from class where id=%s", [nid,])
 
     #3. 返回url（函数）班级列表
     return redirect('/classes/')
@@ -112,13 +118,14 @@ def edit_classes(request):
     #0. 通过GET请求时正常显示网页，取得相关数据, 展示在编辑页面
     if request.method =='GET':
 
-        conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
-        cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-        cursor.execute("select id,class from class where id=%s",[g_nid,])
-        result = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        print(result)
+        # conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
+        # cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+        # cursor.execute("select id,class from class where id=%s",[g_nid,])
+        # result = cursor.fetchone()
+        # cursor.close()
+        # conn.close()
+        # print(result)
+        result=sqlhelper.get_one("select id,class from class where id=%s",[g_nid,])
 
         return render(request,'edit_classes.html',{'result': result})
 
@@ -130,12 +137,13 @@ def edit_classes(request):
         # print('edit_n',edit_n)
 
         #2. 连接数据库，编辑数据
-        conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
-        cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
-        cursor.execute("update class set class=%s where id=%s", [edit_n,id,])
-        conn.commit()
-        cursor.close()
-        conn.close()
+        # conn = pymysql.connect(host='127.0.0.1', port=3306, user='k1', passwd='123', db='db10', charset='utf8')
+        # cursor = conn.cursor(cursor=pymysql.cursors.DictCursor)
+        # cursor.execute("update class set class=%s where id=%s", [edit_n,id,])
+        # conn.commit()
+        # cursor.close()
+        # conn.close()
+        sqlhelper.modify("update class set class=%s where id=%s", [edit_n, id,])
 
         return redirect('/classes/')
 
