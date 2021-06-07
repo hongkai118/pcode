@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>添加offer</h1>
+<!--<table border="1" />-->
+<!--    <thead>-->
+<!--        <tr>-->
+<!--            <th>id</th>-->
+<!--            <th>行业</th>-->
+<!--            <th>职能</th>-->
+<!--            <th>部门</th>-->
+<!--            <th>公司</th>-->
+<!--            <th>职位</th>-->
+<!--            <th>候选人</th>-->
+<!--            <th>客户offer</th>-->
+<!--            <th>团队offer</th>-->
+<!--            <th>offer时间</th>-->
+<!--            <th>客户owner</th>-->
+<!--            <th>con_window</th>-->
+<!--            <th>offer_owner</th>-->
+<!--            <th>编辑时间</th>-->
+<!--        </tr>-->
+<!--    </thead>-->
+<!--    </tbody>-->
+<!--</table>-->
+<form method="POST" action="/add_offer/">
+    <p>行业
+        <select name="hangye_id">
+            {% for row in hangye_list %}
+                <option value="{{row.id}}">{{row.hy_name}}</option>
+            {% endfor %}
+
+        </select>
+    </p>
+
+    <p>职能
+        <select name="zhineng_id">
+            {% for row in zhineng_list %}
+                <option value="{{row.id}}">{{row.zn_name}}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>部门
+        <select name="bumen_id">
+            {% for row in bumen_list %}
+                <option value="{{row.id}}">{{row.bm_name}}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>公司<input type="text" name="company" /></p>
+    <p>职位<input type="text" name="title" /></p>
+    <p>候选人<input type="text" name="cnd_name" /></p>
+    <p>客户offer<input type="text" name="client_offer" /></p>
+    <p>团队offer<input type="text" name="team_offer" /></p>
+    <p>offer时间<input type="text" name="offer_time" /></p>
+    <p>客户owner<input type="text" name="client_owner" /></p>
+    <p>con_window<input type="text" name="contact_window" /></p>
+    <p>offer_owner<input type="text" name="offer_owner" /></p>
+    <input type="submit" value="提交" />
+</form>
+
+</body>
+</html>

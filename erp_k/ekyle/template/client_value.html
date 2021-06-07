@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>offer总表</h1>
+<a href="/zoffer/">offer总表</a>
+<a href="/month_offer/">每月业绩</a>
+<a href="/client_value/">客户贡献</a>
+<table border="1" />
+    <thead>
+        <tr>
+            <th>客户</th>
+            <th>offer</th>
+            <th>个数</th>
+
+        </tr>
+    </thead>
+    </tbody>
+        {% for row in result %}
+        <tr>
+            <td>{{row.company}}</td>
+            <td>{{row.offer}}</td>
+            <td>{{row.jishu}}</td>
+
+        {% endfor %}
+
+</table>
+<p>合计</p>
+<a>{{client_offer.client_sum_offer}}</a>
+
+
+</body>
+</html>

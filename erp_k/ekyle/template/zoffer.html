@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.4.1-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/static/plugins/font-awesome-4.7.0/css/font-awesome.css" />
+</head>
+<body>
+
+    <div style="width:1000px;margin:0 auto;">
+        <h1>offer总表</h1>
+        <div style="margin:10px 0;">
+        <a class="btn btn-primary" href="/add_offer/" target="_blank">添加</a>
+        <a class="btn btn-info" href="/month_offer/" target="_blank">每月业绩</a>
+        <a class="btn btn-info" href="/client_value/" target="_blank">客户贡献</a>
+        <div/>
+        <table class="table table-striped table-bordered table-hover" />
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>行业</th>
+                    <th>职能</th>
+                    <th>部门</th>
+                    <th>公司</th>
+                    <th>职位</th>
+                    <th>候选人</th>
+                    <th>客户offer</th>
+                    <th>团队offer</th>
+                    <th>offer时间</th>
+                    <th>客户owner</th>
+                    <th>con_window</th>
+                    <th>offer_owner</th>
+                    <th>编辑时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            </tbody>
+                {% for row in offer_list %}
+                <tr>
+                    <td>{{row.id}}</td>
+                    <td>{{row.hy_name}}</td>
+                    <td>{{row.zn_name}}</td>
+                    <td>{{row.bm_name}}</td>
+                    <td>{{row.company}}</td>
+                    <td>{{row.title}}</td>
+                    <td>{{row.cnd_name}}</td>
+                    <td>{{row.client_offer}}</td>
+                    <td>{{row.team_offer}}</td>
+                    <td>{{row.offer_time}}</td>
+                    <td>{{row.client_owner}}</td>
+                    <td>{{row.contact_window}}</td>
+                    <td>{{row.offer_owner}}</td>
+                    <td>{{row.insert_time}}</td>
+                    <td><a class="glyphicon glyphicon-pencil" href="/edit_offer/?id={{row.id}}"></a></td>
+                </tr>
+                {% endfor %}
+
+        </table>
+    </div>
+
+</body>
+</html>
+
+
+
+</body>
+</html>
