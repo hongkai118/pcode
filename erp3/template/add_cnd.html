@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>添加候选人</h2>
+<form method="POST" action="/add_cnd/">
+    <p>待办:<input type="text" name="todo"/></p>
+    <p>意向:<input type="text" name="motivation"/></p>
+    <p>offer:<input type="text" name="offer"/></p>
+    <p >级别：
+        {% for row in cnd_level %}
+        <input type="radio" name="cnd_level" id="{{row.cl_name}}" value="{{row.id}}"/><label for="{{row.cl_name}}">{{row.cl_name}}</label>
+        {% endfor %}
+    </p>
+    <p>薪资范围：<input type="text" name="min_salary" value="0"/>--<input type="text" name="max_salary" value="0"/></p>
+
+    <p >行业：
+        {% for row in hangye %}
+        <input type="radio" name="hangye_id" id="{{row.hy_name}}" value="{{row.id}}"/><label for="{{row.hy_name}}">{{row.hy_name}}</label>
+        {% endfor %}
+    </p>
+
+    <p>职能：
+        <select name="zhineng_id">
+            {% for row in zhineng %}
+            <option value="{{row.id}}" >{{row.zn_name}}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>部门：
+        <select name="bumen_id" >
+            {% for row in bumen %}
+            <option value="{{row.id}}" >{{row.bm_name}}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>剂型：
+        <select name="jixing_id" >
+            {% for row in jixing %}
+            <option value="{{row.id}}" >{{row.jx_name}}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>warning:<input type="text" name="warning" /></p>
+    <p>上班时间:<input type="text" name="board_time" /></p>
+    <p>profile_url:<input type="text" name="profile_url" /></p>
+    <p>公司<input type="text" name="company" /></p>
+    <p>姓名<input type="text" name="cnd_name" /></p>
+    <p>简称<input type="text" name="c_name" /></p>
+    <p>性别:
+        <input type="radio" name="gender" value="m" id="male"/><label for="male">男</label>
+        <input type="radio" name="gender" value="f" id="female"/><label for="female">女</label>
+    </p>
+
+    <p>学历:
+        <input type="radio" name="degree" value="college" id="college"/><label for="college">大专</label>
+        <input type="radio" name="degree" value="bachelor" id="bachelor"/><label for="bachelor">本科</label>
+        <input type="radio" name="degree" value="master" id="master"/><label for="master">硕士</label>
+        <input type="radio" name="degree" value="phd" id="phd"/><label for="phd">博士</label>
+        <input type="radio" name="degree" value="mba" id="mba"/><label for="mba">mba</label>
+    </p>
+
+    <p>地点：<input type="text" name="location" />    </p>
+    <p>职位：<input type="text" name="title" />    </p>
+<!--    <p>出生年月：<input type="text" name="birth_day" value="0"/>    </p>-->
+    <p>电话：<input type="text" name="phone" />    </p>
+    <p>邮箱：<input type="text" name="email" />    </p>
+    <p>微信：<input type="text" name="wechat" />    </p>
+    <p>CV：<input type="text" name="cv" />    </p>
+    <p>email_notice：<input type="text" name="email_notice" />    </p>
+    <p>期望地：<input type="text" name="expect_workplace" />    </p>
+
+    <p>备注：<input type="text" name="comments" />    </p>
+
+    <p><input type="submit"/></p>
+
+</form>
+
+
+</body>
+</html>

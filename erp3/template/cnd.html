@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>首页</h1>
+<br/>
+<a href='/add_cnd/'>添加候选人</a>
+<table border="1">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>待办</th>
+        <th>意向</th>
+        <th>offer</th>
+        <th>级别</th>
+        <th>最低</th>
+        <th>最高</th>
+
+        <th>行业</th>
+        <th>职能</th>
+        <th>部门</th>
+        <th>剂型</th>
+        <th>注意</th>
+        <th>上班时间</th>
+        <th>profile_url</th>
+        <th>公司</th>
+        <th>姓名</th>
+        <th>简称</th>
+        <th>性别</th>
+        <th>学历</th>
+        <th>地点</th>
+        <th>职位</th>
+<!--        <th>毕业时间</th>-->
+<!--        <th>专业</th>-->
+<!--        <th>学校</th>-->
+        <th>出生年月</th>
+        <th>电话</th>
+        <th>邮箱</th>
+        <th>微信</th>
+        <th>CV</th>
+        <th>email_notice</th>
+        <th>期望地</th>
+        <th>录入日期</th>
+        <th>顾问</th>
+        <th>备注</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for row in result %}
+    <tr>
+        <td>{{row.id}}</td>
+        <td>{{row.todo}}</td>
+        <td>{{row.motivation}}</td>
+        <td>{{row.offer}}</td>
+        <td>{{row.cl_name}}</td>
+        <td>{{row.min_salary}}</td>
+        <td>{{row.max_salary}}</td>
+        <td>{{row.hy_name}}</td>
+        <td>{{row.zn_name}}</td>
+        <td>{{row.bm_name}}</td>
+        <td>{{row.jx_name}}</td>
+
+        <td>{{row.warning}}</td>
+        <td>{{row.borad_time}}</td>
+        <td>{{row.profile_url}}</td>
+
+        <td>{{row.company}}</td>
+        <td>{{row.cnd_name}}</td>
+        <td>{{row.c_name}}</td>
+        <td>{{row.gender}}</td>
+        <td>{{row.degree}}</td>
+        <td>{{row.location}}</td>
+        <td>{{row.title}}</td>
+<!--        <td>{{row.graduate_time}}</td>-->
+<!--        <td>{{row.major}}</td>-->
+<!--        <td>{{row.school}}</td>-->
+        <td>{{row.birth_day}}</td>
+        <td>{{row.phone}}</td>
+        <td>{{row.email}}</td>
+        <td>{{row.wechat}}</td>
+        <td>{{row.cv}}</td>
+
+        <td>{{row.email_notice}}</td>
+        <td>{{row.expect_workplace}}</td>
+        <td>{{row.insert_time}}</td>
+        <td>{{row.consultant}}</td>
+        <td>{{row.comments}}</td>
+
+        <td>编辑</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>首页</h1>
+<a href="#">总offer</a>
+<a href="#">团队offer</a>
+<br/>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>行业</th>
+        <th>职能</th>
+        <th>部门</th>
+        <th>公司</th>
+        <th>职位</th>
+
+        <th>候选人</th>
+        <th>offer时间</th>
+        <th>客户offer</th>
+        <th>团队offer</th>
+        <th>客户owner</th>
+        <th>offer_owner</th>
+        <th>contact_window</th>
+        <th>kyle</th>
+        <th>shelley</th>
+        <th>raya</th>
+        <th>amy</th>
+        <th>vera</th>
+        <th>skye</th>
+        <th>cristina</th>
+        <th>录入时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for row in result %}
+    <tr>
+        <td>{{row.id}}</td>
+        <td>{{row.hy_name}}</td>
+        <td>{{row.zn_name}}</td>
+        <td>{{row.bm_name}}</td>
+        <td>{{row.company}}</td>
+        <td>{{row.title}}</td>
+        <td>{{row.cnd_name}}</td>
+        <td>{{row.offer_time}}</td>
+
+        <td>{{row.client_offer}}</td>
+        <td>{{row.team_offer}}</td>
+        <td>{{row.client_owner}}</td>
+        <td>{{row.offer_owner}}</td>
+        <td>{{row.contact_window}}</td>
+
+        <td>{{row.kyle}}</td>
+        <td>{{row.shelley}}</td>
+        <td>{{row.raya}}</td>
+        <td>{{row.amy}}</td>
+        <td>{{row.vera}}</td>
+        <td>{{row.skye}}</td>
+        <td>{{row.cristina}}</td>
+        <td>{{row.insert_time}}</td>
+        <td>编辑</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+</body>
+</html>
