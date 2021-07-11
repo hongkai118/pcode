@@ -1,35 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+    .jiacu {
+        font-weight: 700;
+    }
+    </style>
 </head>
 <body>
 <h1>每月业绩</h1>
 <a href="/zoffer/">offer总表</a>
 <a href="/month_offer/">每月业绩</a>
 <a href="/client_value/">客户贡献</a>
+<br />
+<br />
+
+<h2>{{s_time}}到{{e_time}}</h2>
 <table border="1" />
     <thead>
         <tr>
             <th>日期</th>
-            <th>offer</th>
+            <th>团队</th>
+            <th>Kyle</th>
+            <th>Shelley</th>
+            <th>Raya</th>
+            <th>vera</th>
+            <th>amy</th>
+            <th>skye</th>
+            <th>cristina</th>
 
         </tr>
     </thead>
     </tbody>
         {% for row in result %}
         <tr>
-            <td><time>{{row.offer_time}}<time/></td>
-            <td>{{row.month_offer}}</td>
-
+            <td>{{row.mon}}</td>
+            <td>{{row.team_performance}}</td>
+            <td>{{row.kyle}}</td>
+            <td>{{row.shelley}}</td>
+            <td>{{row.raya}}</td>
+            <td>{{row.vera}}</td>
+            <td>{{row.amy}}</td>
+            <td>{{row.skye}}</td>
+            <td>{{row.cristina}}</td>
         {% endfor %}
         </tr>
-            <br>
+        <tr >
+            <td class="jiacu">合计</td>
+            <td class="jiacu">{{sum_guwen_offer.team_offer}}</td>
+            <td class="jiacu">{{sum_guwen_offer.kyle}}</td>
+            <td class="jiacu">{{sum_guwen_offer.shelley}}</td>
+            <td class="jiacu">{{sum_guwen_offer.raya}}</td>
+            <td class="jiacu">{{sum_guwen_offer.vera}}</td>
+            <td class="jiacu">{{sum_guwen_offer.amy}}</td>
+            <td class="jiacu">{{sum_guwen_offer.skye}}</td>
+            <td class="jiacu">{{sum_guwen_offer.cristina}}</td>
 
+        </tr>
+        <tr >
+            <td class="jiacu">offer个数</td>
+
+            <td class="jiacu">{{count_cons.team_offer}}</td>
+            <td class="jiacu">{{count_cons.kyle}}</td>
+            <td class="jiacu">{{count_cons.shelley}}</td>
+            <td class="jiacu">{{count_cons.raya}}</td>
+            <td class="jiacu">{{count_cons.vera}}</td>
+            <td class="jiacu">{{count_cons.amy}}</td>
+            <td class="jiacu">{{count_cons.skye}}</td>
+            <td class="jiacu">{{count_cons.cristina}}</td>
+
+        </tr>
+        <tr >
+            <td class="jiacu">offer均单</td>
+            <td class="jiacu">{{avg_offer.team_offer}}</td>
+            <td class="jiacu">{{avg_offer.kyle}}</td>
+            <td class="jiacu">{{avg_offer.shelley}}</td>
+            <td class="jiacu">{{avg_offer.raya}}</td>
+            <td class="jiacu">{{avg_offer.vera}}</td>
+            <td class="jiacu">{{avg_offer.amy}}</td>
+            <td class="jiacu">{{avg_offer.skye}}</td>
+            <td class="jiacu">{{avg_offer.cristina}}</td>
+
+        </tr>
+
+<br>
 </table>
-<p>合计</p>
-<a>{{sumoffer.team_offer}}</a>
+
+
+<br/>
+-----------------------------------------------------------------------------
+<br/>
+输入查询时间
+<form method="POST" ACTION="/month_offer/">
+    <input style="text" name="s_time"/>
+    <input style="text" name="e_time"/>
+    <input type="submit" />
+</form>
 
 
 </body>

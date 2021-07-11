@@ -35,7 +35,7 @@
                     <th>操作</th>
                 </tr>
             </thead>
-            </tbody>
+            <tbody>
                 {% for row in offer_list %}
                 <tr>
                     <td>{{row.id}}</td>
@@ -55,6 +55,11 @@
                     <td><a class="glyphicon glyphicon-pencil" href="/edit_offer/?id={{row.id}}"></a></td>
                 </tr>
                 {% endfor %}
+                <tr>
+                    <td>合计</td>
+                </tr>
+
+            </tbody>
 
         </table>
     </div>

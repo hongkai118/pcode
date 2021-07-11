@@ -3,33 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .jiacu {
+         font-weight: 700;
+                }
+    </style>
 </head>
 <body>
 <h1>offer总表</h1>
 <a href="/zoffer/">offer总表</a>
 <a href="/month_offer/">每月业绩</a>
 <a href="/client_value/">客户贡献</a>
+
+<h2>{{s_time}}到{{e_time}}</h2>
 <table border="1" />
     <thead>
         <tr>
+
+            <th>编号</th>
             <th>客户</th>
-            <th>offer</th>
+            <th>客户总offer</th>
+            <th>团队offer</th>
             <th>个数</th>
 
         </tr>
     </thead>
-    </tbody>
+    <tbody>
         {% for row in result %}
         <tr>
+            <td>{{row.num}}</td>
             <td>{{row.company}}</td>
             <td>{{row.offer}}</td>
+            <td>{{row.sum_team_offer}}</td>
             <td>{{row.jishu}}</td>
 
         {% endfor %}
+        </tr>
+        <tr>
+            <td class="jiacu">合计</td>
+            <td class="jiacu">--</td>
+            <td class="jiacu">{{client_offer.client_sum_offer}}</td>
+            <td class="jiacu">{{client_offer.sum_team_offer}}</td>
+            <td class="jiacu">{{client_offer.offer_counts}}</td>
 
+        </tr>
+    </tbody>
 </table>
-<p>合计</p>
-<a>{{client_offer.client_sum_offer}}</a>
+<br/>
+<h2>每位客户Owner给我们团队的贡献</h2>
+<table>
+    {% for owner in sum_owner%}
+    <tr>
+        <td>{{owner.client_owner}}</td>
+        <td>{{owner.team_offer}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br/>
+<br/>
+查询时间
+<form method="POST" action="/client_value/">
+    <input type="text" name="s_time"/>
+    <input type="text" name="e_time"/>
+    <input type="submit"/>
+</form>
 
 
 </body>
