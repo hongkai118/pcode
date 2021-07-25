@@ -125,7 +125,7 @@ def get_detail(code_list):
     all_jj=[]
     r_num =1 #记录行的位置
     jj_count =1
-    for code in code_list[84:]:
+    for code in code_list:
         print('获取基金的详细情况:',code)
         print('构造基金主页，持有人机构，基本概况页面...')
         url_home = 'http://fund.eastmoney.com/'+code+'.html' #基金主页url构造
