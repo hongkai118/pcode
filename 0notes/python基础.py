@@ -620,7 +620,323 @@
             ——hilbert曲线
             ——谢尔宾斯基三角形
     
+
+4. 面像对象的编程
+    ——概念：
+        ——在Python中万物皆对象
+        ——对象(object)=属性+方法。
+        ——实现代码的封装
+        ——引用形式：<对象名>.<属性名>，例如：
+            ——"abc".upper()
+        ——面向对象编程（OOP）：程序中包含各种独立又能互相调用的对象，每个对象都能接受、处理数据并将数据传递给其他对象
+        ——传统程序设计：将程序看作一系列函数或指令的集合。
     
- 
-4. 常见函数
+            
+    ——什么是类:
+        ——类是对象的模板，封装了对应的实体的性质和行为
+		——实例对象（Instance Objects)是类的具体化
+		——把类比作模具，对象则是用磨具制造出来的零件
+		——类的出现，为编程的三个最重要的特性提供了实现手段：封装性、继承性、多态性
+		——和函数相似，类是一系列代码的封装。书写规范
+		    ——类名：用大写字母开头，
+			——函数名；用小写字母开头
+	——定义类：
+	    ——class <类名>:
+		    def __init__(self,<参数表>)
+			def <方法名>(self,<参数表>)
+		—— __init__() 是一个特殊的函数名，用于根据类的定义创建实例对象，第一个参数必须是self
+		
+		——定义和调用实例：
+			#定义类
+			class Force:
+				def __init__(self,x,y):
+					self.fx=x
+					self.fy=y
+				def show(self):
+					print("Force<%s,%s>"%(self.fx,self.fy))
+				def add(self,force2):
+					x=self.fx+force2.fx
+					y=self.fy+force2.fy
+					return Force(x,y)
+			#实例化对象
+			f1=Force(0,1)
+			f2=Force(3,5)
+			
+			#调用方法
+			f1.show()
+			f3=f1.add(f2)		
+	——特殊方法：
+		——特征：以__开始和结束的，也叫magic-method
+		——算数运算符：
+		    __add__(self,other):使用+的操作符
+		    __sub__(self,other):使用-的操作符
+		    __mul__(self,other):使用*的操作符
+		    __div__(self,other):使用/的操作符     
+	    ——大小比较：
+		    __eq__(self,other):使用==操作符
+		    __ne__(self,other):使用!=操作符
+		    __lt__(self,other):使用<操作符
+		    __gt__(self,other):使用>操作符
+		    __le__(self,other):使用<=操作符
+		    __ge__(self,other):使用>=操作符       
+        ——实例代码：
+            class Force:
+                def __init__(self,x,y):
+                    self.fx=x
+                    self.fy=y
+                def show(self):
+                    print("Force<%s,%s>"%(self.fx,self.fy))
+                def add(self,force2):
+                    x=self.fx+force2.fx
+                    y=self.fy+force2.fy
+                    return Force(x,y)
+
+                __add__ = add
+                def __str__(self):
+                    return "F<%s,%s>"%(self.fx,self.fy)
+                
+                def __mul__(self,n):
+                    x=self.fx*n
+                    y=self.fy*n
+                    return Force(x,y)
+                
+                def __eq__(self, force2):
+                    return (self.fx==force2.fx) and (self.fy==force2.fy)
+
+
+                f1= Force(0,1)
+                f2= Force(0,10)
+                f3 = f1+f2
+                f3.show()
+                f3=f1*4.5
+                f3.show() #Force(0.0,4.5)
+                print(f1==f2) #False      
+        ——其他特殊方法：
+            ——字符串操作：也可以使用__add__(),__sub()__等方法进行操作
+            —— __str__(self):自动转换为字符串
+            —— __repr__(self):返回一个用来表示对象的字符串
+            —— __len__(self):返回元素个数
+            
+        
+    ——列表排序:sort(),sorted()
+        ——列表方法sort()
+            list.sort()#正序
+            list.sort(reverse = True) #反序
+        ——通用函数sorted():类似sort()，但返回的是排好序的列表副本，原列表内容不变
+            sorted_list1=sorted(list1)
+        ——只有当列表中的所有元素都是用一种类型时，sort()和sorted()才会正常工作
+        
+        ——特殊方法__lt__ ：<符号的作用
+            ——每一种数据类型都可以定义特殊方法
+            ——方法说明：
+                def __lt__(self,y):
+                   ——返回True,排在前面(视为比'y'小)
+                   ——返回False,排在后面(视为比'y'大)
+            ——只要类中定义了特殊方法__lt__,任何自定义类都可以使用x<y这样的比较；
+                ——定义__lt__后；list1.sort()这样的内置行数，也会优先使用类中的<进行比较
+            ——示例代码：
+                #希望学生的分数从大到小，进行排列
+                class Student:
+                    def __init__(self,name,grade):
+                        self.name=name
+                        self.grade=grade
+                    
+                    #内容函数sort只引用<判断前后
+                    def __lt__(self,other):
+                        #返回Ture，本体成绩放前面，返回False本体成绩放后面
+                        return self.grade > other.grade
+                    
+                    #Student的易读字符串表示；如果不写这个方法，返回的时对象地址，而非字符串
+                    def __str__(self):
+                        return "(%s,%d)"%(self.name,self.grade)
+                    
+                    #Student的正式字符表表示，我们让他跟易读表示相同
+                    __repr__ = __str__
+
+                #构造一个list
+                s = list()
+
+                #添加Student对象到List
+                s.append(Student("jack",80))
+                s.append(Student("jane",70))
+                s.append(Student("mary",60))
+                s.append(Student("tony",90))
+                s.append(Student("lisa",92))
+                s.append(Student("tim",80))
+
+                print("Original:",s)
+                #Original: [(jack,80), (jane,70), (mary,60), (tony,90), (lisa,92), (tim,80)]
+
+                #优先调用Student的__lt__的方法进行排序
+                s.sort()
+                print("Sorted:",s)
+                #Sorted: [(lisa,92), (tony,90), (jack,80), (tim,80), (jane,70), (mary,60)]
+                
+                #还可以进行对象的对比
+                print(s[0]<s[1]) #返回True
+
+
+    ——类的继承机制
+        ——示例代码：
+            class Car:
+                def __init__(self,name):
+                    self.name = name
+                    self.remain_mile = 0 
+                
+                def fill_fuel(self,miles):
+                    self.remain_mile = miles
+                
+                def status(self):
+                    print('Car:%s,Remain_miles:%s'%(self.name,self.remain_mile))
+
+                def run(self,miles):
+                    print(self.name, end=': ')
+                    if self.remain_mile>=miles:
+                        self.remain_mile=self.remain_mile-miles
+                        print("run %d miles!!"%(miles,))
+                        print("remain_miles:",self.remain_mile)
+                    else:
+                        print("fuel out!")
+
+                #汽油车
+                class GasCar(Car):
+                    def fill_fuel(self,gas):
+                        self.remain_mile=gas*6 #每升6英里
+                #电动车
+                class ElecCar(Car):
+                    def fill_fuel(self, power):
+                        self.remain_mile = power * 3.0 #每度电3英里
+
+            gcar=GasCar('BMW')
+            gcar.fill_fuel(50)
+            gcar.status()
+            gcar.run(200)
+
+            ecar=ElecCar('Tesla')
+            ecar.fill_fuel(60)
+            ecar.status()
+            ecar.run(200)
+        ——子类和父类
+            ——调用方法：class 子类(父类)，自动继承父类的方法和属性
+            ——覆盖：同名方法调用子类方法和属性
+            ——子类还可以添加父类中没有的方法和属性：用super()
+                class GasCar(car):
+                   def __init__(self,name,capacity)
+                       super().__init__(name) #调用父类的初始化方法
+                       self.capacity = capacity #增加排量属性 
+        ——self:
+            ——在类定义中，所有的方法的首个参数一般都是self
+            ——作用：在类内部，实例化过程中传入的所有数据都赋给这个变量
+            ——实际上代表了对象实例
+                —— <对象>.<方法>(<参数>) 等价于： 
+                —— <类>.<方法>(<对象(self)>,<参数>)
+                —— 如，gcar.run(200) 等价于 GasCar.run(gcar,200)
+
+5. 高级特性：
+    ——异常处理 try-excepth, Exception:
+        ——代码错误类型：
+            ——语法错误：SyntaxError
+            ——除以0错误：ZeroDivisionError
+            ——列表下标越界：IndexError
+            ——类型错误：TypeError
+            ——变量不存在：NameError
+            ——字典关键字不存在：KeyError
+            ——未知的变量属性：AttributeError
+        —— try except,[finally] 语句：
+            ——语法：
+                try:
+                    <检测语句>
+                except <错误类型> [as e]:
+                    <处理异常>
+                finally:    #可以不要
+                    <语句块> #无论结果是否出错，都执行代码
+            ——针对异常可以设置多个except
+            
+        —— try except,[else] 语句：        
+            ——语法：
+                try:
+                    <检测语句>
+                except <错误类型> [as e]:
+                    <处理异常>
+                else:    #可以不要
+                    <语句块> #没有出错时执行的语句（出错了就不执行）
+    ——推导式
+        ——概念和特点：
+            ——从一个或多个迭代器快速简洁地常见数据结构的一种方法
+            ——将循环和条件判断结合，从而避免语句冗长的代码
+            ——可以用来生成列表、字典和集合
+        ——基本语法：
+            ——列表推导式：[<表达式> for <变量> in <可迭代对象> if <逻辑条件>]
+            ——字典推导式：{<键值表达式>:<元素表达式> for <变量> in <可迭代对象> if <逻辑条件>}
+            ——集合推导式：{<元素表达式> for <变量> in <可迭代对象> if <逻辑条件>}
+            ——实例代码：
+                >>> {'K%d'%(x,):x**3 for x in range(10)}
+                {'K0': 0, 'K1': 1, 'K2': 8, 'K3': 27, 'K4': 64, 'K5': 125, 'K6': 216, 'K7': 343, 'K8': 512, 'K9': 729}
+                >>> {x+y for x in range(10) for y in range(x)} #集合可以去重复
+                {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17}
+                
+                #列表不去重复
+                >>> [x+y for x in range(10) for y in range(x)]
+                [1, 2, 3, 3, 4, 5, 4, 5, 6, 7, 5, 6, 7, 8, 9, 6, 7, 8, 9, 10, 11, 7, 8, 9, 10, 11, 12, 13, 8, 9, 10, 11, 12, 13, 14, 15, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+                
+                >>> [x*x for x in range(10)] #列表有序
+                [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+                >>> {x*x for x in range(10)} #集合无序
+                {0, 1, 64, 4, 36, 9, 16, 49, 81, 25}
+
+                >>> [x*x for x in range(10) if x%2 == 0] #满足整除2的才进行平方
+                [0, 4, 16, 36, 64]
+                >>> [x.upper() for x in [1,'abc','xyz',True] if isinstance(x,str)]
+                ['ABC', 'XYZ']
+        ——生成器推导式
+            ——语法：(<元素表达式> for <变量> in <可迭代对象> if <逻辑条件>)
+            ——特征：
+                ——返回一个生成器对象，也是可迭代的对象
+                ——但生成器不立即产生全部元素，仅在要用到元素的时候才生成，可以极大的节省内存
+                ——示例代码：
+                    >>> agen = (x*x for x in range(10))
+                    >>> agen
+                    <generator object <genexpr> at 0x000001E6A20AB900>
+                    >>> for n in agen:
+                        print(n)
+    ——生成器(generator)：
+        ——特点：
+            ——生成器时用来创建数据序列的一种对象
+            ——使用它可以迭代庞大的序列，且不需要在内存中创建和存储整个序列
+            ——通常生成器是为迭代器产生数据的：迭代器的一种实现
+        ——生成器函数：
+            ——创建简单的生成器，用推导式
+            ——创建比较大的序列，一行的推导式特别复杂，就用生成器函数。
+            ——定义与普通函数相同，只是将return换成了yield
+                ——return:终止函数的执行，下次调用重新执行函数
+                ——yield:下次一次执行，从yield后的语句继续执行，直到再次yield返回或终止
+            ——实例代码：
+            def even_number(max):
+                n=0
+                while n < max:
+                    yield n
+                    n = n + 2 
+                for i in even_number(10):
+                    print(i) #结果; 0,2,4,6,8
+
+6. 高级扩展程序（需要用到的时候，去网上搜新的教程，单独再学习）
+    ——图像处理库：Pillow库(P54)
+        ——图片处理
+        ——生成验证码
+    ——web服务框架
+        ——特性：
+            ——路由：解析url
+            ——模板：把服务器合并成HTML页面
+            ——认证和授权：处理用户名、密码和权限
+            ——Session:处理用户的多次请求之间需要存储的数据
+            ——具备以上一种或多种
+        ——Flask框架
+    ——网络爬虫
+        ——requests库
+        ——Beautiful Soup库
+    ——绘制数据图表
+        ——numpy矩阵处理库
+        ——matplotlib库
+7. 常见函数
     ——range()：range(<起点>,<终点>,<步长>)
