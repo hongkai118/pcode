@@ -46,7 +46,7 @@ if __name__=='__main__':
     print('结果为如下：')
 
     #num=1是表示2字姓名，num=2是3字姓名
-    get_name(last_name='',num=2)
+    get_name(last_name='',num=1)
 
 
 
